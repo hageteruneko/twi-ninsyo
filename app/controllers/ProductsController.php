@@ -132,16 +132,6 @@ class ProductsController extends ControllerBase
 
             return;
         }
-
-        $this->view->disable();
-        if ($this->request->hasFiles() == true) {
-            foreach ($this->request->getUploadedFiles() as $file){
-                   echo $file->getName(), ' ', $file->getSize(), '\n';
-            }
-        } else {
-            echo 'File not uploaded';
-        }
-
         $this->flash->success("product was created successfully");
         
         $this->dispatcher->forward([
@@ -262,6 +252,9 @@ class ProductsController extends ControllerBase
         } else {
         echo 'File not uploaded';
         }
+    }
+    public function phpinfoAction(){
+    phpinfo();
     }
 }
 
