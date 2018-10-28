@@ -109,7 +109,7 @@ class ProductsController extends ControllerBase
 
             return;
         }
-        if ($this->request->hasFiles("image")) {
+        if ($this->request->hasFiles()) {
             foreach ($this->request->getUploadedFiles() as $file){
                echo $file->getName(), ' ', $file->getSize(), '\n';
             }
