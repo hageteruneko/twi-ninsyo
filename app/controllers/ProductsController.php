@@ -109,6 +109,13 @@ class ProductsController extends ControllerBase
 
             return;
         }
+        if ($this->request->hasFiles("image")) {
+            foreach ($this->request->getUploadedFiles() as $file){
+               echo $file->getName(), ' ', $file->getSize(), '\n';
+            }
+        } else {
+        echo 'File not uploaded';
+        }
 
         $product = new Products();
         $product->id = $this->request->getPost("id");
@@ -241,20 +248,6 @@ class ProductsController extends ControllerBase
             'controller' => "products",
             'action' => "index"
         ]);
-    }
-    public function uploadAction()
-    {
-    $this->view->disable();
-        if ($this->request->hasFiles() == true) {
-            foreach ($this->request->getUploadedFiles() as $file){
-               echo $file->getName(), ' ', $file->getSize(), '\n';
-            }
-        } else {
-        echo 'File not uploaded';
-        }
-    }
-    public function phpinfoAction(){
-    phpinfo();
     }
 }
 
