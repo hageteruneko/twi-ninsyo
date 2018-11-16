@@ -109,13 +109,19 @@ class ProductsController extends ControllerBase
 
             return;
         }
-        if ($this->request->hasFiles()) {
-            foreach ($this->request->getUploadedFiles() as $file){
-               echo $file->getName(), ' ', $file->getSize(), '\n';
+        if($this->request->hasFiles()){
+        //アップロードファイルがあるかどうかをチェックします。
+        $dir_path = APP_PATH.'files';
+        //画像を保管する場所、なければ作成
+        //mkdirは引数の２番目にアクセス制限を指定できます。
+            if(is_dir($dir_path) === false){
+            mkdir($dir_path);
             }
-        } else {
-        echo 'File not uploaded';
+            foreach ($this->request->getUploadedFiles() as $file) {
+            //アップロードされたファイルを取得し、移動させます。
+            $file->moveTo($dir_path. DIRECTORY_SEPARATOR . $file->getName());
         }
+    }
 
         $product = new Products();
         $product->id = $this->request->getPost("id");
