@@ -120,8 +120,8 @@ class ProductsController extends ControllerBase
             foreach ($this->request->getUploadedFiles() as $file) {
             //アップロードされたファイルを取得し、移動させます。
             $file->moveTo($dir_path. DIRECTORY_SEPARATOR . $file->getName());
+            }
         }
-    }
 
         $product = new Products();
         $product->id = $this->request->getPost("id");
