@@ -109,19 +109,6 @@ class ProductsController extends ControllerBase
 
             return;
         }
-        if($this->request->hasFiles()){
-        //アップロードファイルがあるかどうかをチェックします。
-        $dir_path = APP_PATH.'files';
-        //画像を保管する場所、なければ作成
-        //mkdirは引数の２番目にアクセス制限を指定できます。
-            if(is_dir($dir_path) === false){
-            mkdir($dir_path);
-            }
-            foreach ($this->request->getUploadedFiles() as $file) {
-            //アップロードされたファイルを取得し、移動させます。
-            $file->moveTo($dir_path. DIRECTORY_SEPARATOR . $file->getName());
-            }
-        }
 
         $product = new Products();
         $product->id = $this->request->getPost("id");
@@ -132,6 +119,20 @@ class ProductsController extends ControllerBase
         $product->rawData = $this->request->getPost("raw_data");
         $product->extension = $this->request->getPost("extension");
         
+        if($this->request->hasFiles()){
+            //アップロードファイルがあるかどうかをチェックします。
+            $dir_path = APP_PATH.'files';
+            //画像を保管する場所、なければ作成
+            //mkdirは引数の２番目にアクセス制限を指定できます。
+            if(is_dir($dir_path) === false){
+            mkdir($dir_path);
+            }
+            foreach ($this->request->getUploadedFiles() as $file) {
+            //アップロードされたファイルを取得し、移動させます。
+            $file->moveTo($dir_path. DIRECTORY_SEPARATOR . $file->getName());
+            $product->image = $file->getName();
+            }
+        }
 
         if (!$product->save()) {
             foreach ($product->getMessages() as $message) {
