@@ -187,6 +187,17 @@ class ProductsController extends ControllerBase
         $product->image = $this->request->getPost("image");
         $product->rawData = $this->request->getPost("raw_data");
         $product->extension = $this->request->getPost("extension");
+
+        if($this->request->hasFiles()){
+            //アップロードファイルがあるかどうかをチェックします。
+            $dir_path = BASE_PATH.'\public\img';
+
+                foreach ($this->request->getUploadedFiles() as $file) {
+                //アップロードされたファイルを取得し、移動させます。
+                $file->moveTo($dir_path. DIRECTORY_SEPARATOR . $file->getName());
+                $product->image = $file->getName();
+                }
+        }
         
 
         if (!$product->save()) {

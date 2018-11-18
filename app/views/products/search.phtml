@@ -30,8 +30,10 @@
             <th>Manual</th>
             <th>Price</th>
             <th>Image</th>
+            <!--
             <th>Raw Of Data</th>
             <th>Extension</th>
+            -->
 
                 <th></th>
                 <th></th>
@@ -46,8 +48,10 @@
             <td><?php echo $product->manual ?></td>
             <td><?php echo $product->price ?></td>
             <td><?php echo $this->tag->image("public/img/".$product->image); ?></td>
-            <td><?php echo $product->raw_data ?></td>
-            <td><?php echo $product->extension ?></td>
+            <!--
+            <td><?php //echo $product->raw_data ?></td>
+            <td><?php //echo $product->extension ?></td>
+            -->
 
                 <td><?php echo $this->tag->linkTo(["products/edit/" . $product->id, "Edit"]); ?></td>
                 <td><?php echo $this->tag->linkTo(["products/delete/" . $product->id, "Delete"]); ?></td>
