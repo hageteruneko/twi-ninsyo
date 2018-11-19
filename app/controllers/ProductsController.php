@@ -111,14 +111,7 @@ class ProductsController extends ControllerBase
         }
 
         $product = new Products();
-        $product->id = $this->request->getPost("id");
-        $product->name = $this->request->getPost("name");
-        $product->manual = $this->request->getPost("manual");
-        $product->price = $this->request->getPost("price");
-        $product->image = $this->request->getPost("image");
-        $product->rawData = $this->request->getPost("raw_data");
-        $product->extension = $this->request->getPost("extension");
-        
+
         if($this->request->hasFiles()){
             //アップロードファイルがあるかどうかをチェックします。
             $dir_path = BASE_PATH.'\public\img';
@@ -127,6 +120,21 @@ class ProductsController extends ControllerBase
                 //アップロードされたファイルを取得し、移動させます。
                 $file->moveTo($dir_path. DIRECTORY_SEPARATOR . $file->getName());
                 $product->image = $file->getName();
+                //画像ファイルの指定
+                $img_file = $dir_path."\/".$file->getName();
+                //拡張子の取得
+                $file_info = pathinfo($img_file);
+                $img_extension = strtolower($file_info['extension']);
+                $product->extension = $img_extension;
+                    if($img_extension='png'||$img_extension='PNG'){       
+                        $product->id = $this->request->getPost("id");
+                        $product->name = $this->request->getPost("name");
+                        $product->manual = $this->request->getPost("manual");
+                        $product->price = $this->request->getPost("price");
+                        $product->rawData = $this->request->getPost("raw_data");
+                    }else{
+                        echo "pngfile or jpegfile please";
+                    }
                 }
         }
 
@@ -180,24 +188,30 @@ class ProductsController extends ControllerBase
             return;
         }
 
-        $product->id = $this->request->getPost("id");
-        $product->name = $this->request->getPost("name");
-        $product->manual = $this->request->getPost("manual");
-        $product->price = $this->request->getPost("price");
-        $product->image = $this->request->getPost("image");
-        $product->rawData = $this->request->getPost("raw_data");
-        $product->extension = $this->request->getPost("extension");
-
         if($this->request->hasFiles()){
             //アップロードファイルがあるかどうかをチェックします。
-            $dir_path = BASE_PATH.'\public\img';
+            $dir_path = BASE_PATH.'\public\img\/';
 
                 foreach ($this->request->getUploadedFiles() as $file) {
                 //アップロードされたファイルを取得し、移動させます。
                 $file->moveTo($dir_path. DIRECTORY_SEPARATOR . $file->getName());
                 $product->image = $file->getName();
+                //画像ファイルの指定
+                $img_file = $dir_path."\/".$file->getName();
+                //拡張子の取得
+                $file_info = pathinfo($img_file);
+                $img_extension = strtolower($file_info['extension']);
+                $product->extension = $img_extension;
                 }
         }
+
+        $product->id = $this->request->getPost("id");
+        $product->name = $this->request->getPost("name");
+        $product->manual = $this->request->getPost("manual");
+        $product->price = $this->request->getPost("price");
+        $product->rawData = $this->request->getPost("raw_data");
+
+
         
 
         if (!$product->save()) {
@@ -255,7 +269,13 @@ class ProductsController extends ControllerBase
 
             return;
         }
-
+        $dir_path = BASE_PATH.'\public\img';
+        $img_file = $dir_path."\/".$product->image;
+        if (unlink($img_file)){
+            echo $img_file.'の削除に成功しました。';
+        }else{
+            echo $img_file.'の削除に失敗しました。';
+        }
         $this->flash->success("product was deleted successfully");
 
         $this->dispatcher->forward([
