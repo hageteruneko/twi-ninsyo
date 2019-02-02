@@ -6,6 +6,10 @@
 defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirname(__FILE__) . '/../..'));
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
+define('CK','ej9c98uGrYDe6sdrQEnv29Ldy');
+define('CKS','KrrVZGgF06j0AhpepGsn95ISDMrftM9NRImOBNKCjUGPnRLMs0');
+define('CBURL','http://localhost/.phalcon/twi+ninsyo/callback.phtml');
+
 return new \Phalcon\Config([
     'database' => [
         'adapter'     => 'Mysql',
