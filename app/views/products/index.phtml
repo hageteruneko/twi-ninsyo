@@ -2,13 +2,6 @@
 /**
  * @var \Phalcon\Mvc\View\Engine\Php $this
  */
-print 'Hello';
-print $this->view->name;
-echo "<br />";
-print 'token  ';
-var_dump($this->view->jwt);
-echo "<br />";
-var_dump($this->view->test);
 ?>
 
 <div class="page-header">
@@ -91,4 +84,3 @@ var_dump($this->view->test);
 </div>
 
 <?php echo $this->tag->endForm(); ?>
-<?= $this->tag->linkTo("logout", "logout"); ?>

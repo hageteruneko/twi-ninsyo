@@ -2,7 +2,7 @@
  
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
-use \Firebase\JWT\JWT;
+
 
 class ProductsController extends ControllerBase
 {
@@ -11,41 +11,7 @@ class ProductsController extends ControllerBase
      */
     public function indexAction()
     {
-        //トークンが飛んできたか
-        if(isset($_GET['jwt'])){
-            $frag="";
-            //認証チェック
-            if($frag==""){
-                $key = "example_key";
-                $jwt = $_GET["jwt"];
-
-                $user = User::find("jwt = '$jwt'");
-
-                //ユーザとトークンが一致するか
-                if(!count($user)==0){
-                    $decoded = JWT::decode($jwt, $key, array('HS256'));
-                    $this->persistent->name = $decoded->name;
-                    $this->persistent->jwt = $jwt;
-                    $this->view->name = $this->persistent->name;
-                    $this->view->jwt = $this->persistent->jwt;
-                    $this->view->decoded = $decoded;
-                    $frag="a";
-                }else{
-                    header("Location: ".'./error.phtml');
-                }
-            }
-            $this->persistent->parameters = null;
-        }else{
-            if($frag=""){
-                header("Location: ".'./index.phtml');
-            }else{
-                $this->view->name = $this->persistent->name;
-                $this->view->jwt = $this->persistent->jwt;
-            }
-        }
-        if($this->persistent->jwt==""){
-            header("Location: ".'./index.phtml');
-        }
+        $this->persistent->parameters = null;
     }
 
     /**
