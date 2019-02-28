@@ -9,6 +9,7 @@ defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 define('CK','ej9c98uGrYDe6sdrQEnv29Ldy');
 define('CKS','KrrVZGgF06j0AhpepGsn95ISDMrftM9NRImOBNKCjUGPnRLMs0');
 define('CBURL','http://localhost/.phalcon/twi+ninsyo/callback.phtml');
+define('KEY','example_key');
 
 return new \Phalcon\Config([
     'database' => [

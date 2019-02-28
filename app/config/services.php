@@ -9,6 +9,7 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Direct as Flash;
 use \Firebase\JWT\JWT;
 use Dmkit\Phalcon\Auth\Middleware\Micro as AuthMicro;
+use Phalcon\Http\Response\Cookies;
 
 require __DIR__ .'\..\..\..\..\..\vendor\autoload.php';
 use Abraham\TwitterOAuth\TwitterOAuth;
@@ -114,3 +115,10 @@ $di->setShared('session', function () {
 
     return $session;
 });
+
+$di->set('cookies', function() {
+    $cookies = new Phalcon\Http\Response\Cookies();
+    $cookies->useEncryption(false);
+    return $cookies;
+});
+   
