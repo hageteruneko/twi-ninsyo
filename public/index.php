@@ -41,7 +41,14 @@ try {
 
     echo str_replace(["\n","\r","\t"], '', $application->handle()->getContent());
 
+    $di->setShared('session', function () {
+        $session = new Session();
+        $session->start();
+        return $session;
+    });
+
 } catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
     echo '<pre>' . $e->getTraceAsString() . '</pre>';
 }
+

@@ -35,15 +35,15 @@ class IndexController extends ControllerBase
             $this->view->connection = $user_connection;
             $user_info = $user_connection->get('account/verify_credentials');
 
-            $key = "example_key";
-
             $user = new User();
             $user->twitter_id = $user_info->screen_name;
             $user->name = $user_info->name;
             $user->id = $user_info->id;
 
-            $jwt = JWT::encode($user, $key);
+            $jwt = JWT::encode($user, KEY);
             $user->jwt = $jwt;
+
+            $this->session->set("jwt", $jwt);
 
             if ($user->save() === false) {
                 echo "できない：\n";
@@ -59,7 +59,7 @@ class IndexController extends ControllerBase
 
             $this->persistent->jwt = $jwt;
             $this->view->jwt = $jwt;
-            $decoded = JWT::decode($jwt, $key, array('HS256'));
+            $decoded = JWT::decode($jwt, KEY, array('HS256'));
             $this->view->decoded = $decoded;
         }
     }

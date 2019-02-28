@@ -1,5 +1,6 @@
 <?php
 var_dump($jwt);
 var_dump($decoded);
+header("Location: ".'products');
 ?>
-<?= $this->tag->linkTo("products?jwt=".$this->view->jwt, "products"); ?>
+<?= $this->tag->linkTo("products", "products"); ?>
