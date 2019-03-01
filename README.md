@@ -12,26 +12,26 @@ twitter+JWT認証
 ↓<br>
 トークンをデコードし、できるなら通し、できないならエラーページに飛ばす<br>
 
-indexcontlloler
-  loginAction
-    ツイッター認証画面に飛ぶ
-    アクセストークンを取得する
-  callbackAction
-    アクセストークンを使い、ID,Twitterでの名前,TwitterIDを取得する
-    得た情報をDBに保管
-    得た情報をすべてJWTでエンコードする
-    エンコードしたものをセッションに保存
-  logoutAction
-    セッションの削除
-  errorAction
-    セッションの削除
+indexcontlloler<br>
+  loginAction<br>
+    ツイッター認証画面に飛ぶ<br>
+    アクセストークンを取得する<br>
+  callbackAction<br>
+    アクセストークンを使い、ID,Twitterでの名前,TwitterIDを取得する<br>
+    得た情報をDBに保管<br>
+    得た情報をすべてJWTでエンコードする<br>
+    エンコードしたものをセッションに保存<br>
+  logoutAction<br>
+    セッションの削除<br>
+  errorAction<br>
+    セッションの削除<br>
   
-productsContlloler
-  indexAction
-    セッションからJWTトークンを取得
-    取得したトークンをデコードし、ユーザの情報を取得
-    セッションがなければ初期画面に飛ぶ
-    セッションがあればセッションを取得
+productsContlloler<br>
+  indexAction<br>
+    セッションからJWTトークンを取得<br>
+    取得したトークンをデコードし、ユーザの情報を取得<br>
+    セッションがなければ初期画面に飛ぶ<br>
+    セッションがあればセッションを取得<br>
     
-    トークンが不正であればエラー画面へ
-    トークンが不正でなければデコードする
+    トークンが不正であればエラー画面へ<br>
+    トークンが不正でなければデコードする<br>
