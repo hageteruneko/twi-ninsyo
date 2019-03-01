@@ -21,9 +21,9 @@ indexcontlloler<br>
 　　得た情報をDBに保管<br>
 　　得た情報をすべてJWTでエンコードする<br>
 　　エンコードしたものをセッションに保存<br>
-　　logoutAction<br>
+　logoutAction<br>
 　　セッションの削除<br>
-　　errorAction<br>
+　errorAction<br>
 　　セッションの削除<br>
   
 productsContlloler<br>
